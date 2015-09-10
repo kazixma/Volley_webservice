@@ -16,6 +16,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.bestiize.volley_webservice.manager.BookManager;
 import com.example.bestiize.volley_webservice.models.Book;
 import com.example.bestiize.volley_webservice.service.BookJSONParser;
+import com.example.bestiize.volley_webservice.service.HttpRequest;
 
 import org.json.JSONArray;
 
@@ -37,16 +38,18 @@ public class BookApplication  extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance=this;
+
         bookList = new ArrayList<>();
         bookManager =new BookManager(bookList);
 
         //bookList.add(new Book("vvv","v","v","v",1.0,1.0));
         //bookList.add(new Book("vvv","v","v","v",1.0,1.0));
         //bookList.add(new Book("vvv","v","v","v",1.0,1.0));
-       // HttpRequest httpRequest = new HttpRequest(bookList);
 
 
-         requestJSON();
+
+
 
     }
 
@@ -85,38 +88,5 @@ public class BookApplication  extends Application{
             mRequestQueue.cancelAll(tag);
         }
     }
-    public void requestJSON(){
-        Log.d("TAG", "HELLO1");
-        String tag_json_array = "json_array_req";
-        String url = "https://dl.dropboxusercontent.com/u/186325148/ands/services/books.json";
-        JsonArrayRequest req = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @TargetApi(Build.VERSION_CODES.KITKAT)
-                    @Override
 
-                    public void onResponse(JSONArray response) {
-                        BookJSONParser bookJSONParser = new BookJSONParser(bookList);
-                        Log.d("TAG", response.toString());
-                        Log.d("TAG","HELLO");
-                        bookList = bookJSONParser.parseFeed(response.toString());
-
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("TAG", "Error: " + error.getMessage());
-
-
-            }
-        });
-
-
-
-        BookApplication.getInstance().addToRequestQueue(req,tag_json_array);
-
-        //return bookList;
-
-
-    }
 }

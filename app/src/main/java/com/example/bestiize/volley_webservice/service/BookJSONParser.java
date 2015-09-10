@@ -35,6 +35,7 @@ public class BookJSONParser {
                 Book book =new Book();
                 book.setId(jsonObject.getString("id"));
                 book.setTitle(jsonObject.getString("title"));
+                Log.d("looper",book.getTitle());
                 book.setAuthor(jsonObject.getString("author"));
                 book.setPublisher(jsonObject.getString("publisher"));
                 book.setPrice(Double.parseDouble(jsonObject.getString("price")));

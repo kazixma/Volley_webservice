@@ -14,7 +14,8 @@ public class BookManager {
     private List<Book> bookList;
     public BookManager(List<Book> bookList) {
         this.bookList=bookList;
-        //parseToJSON();
+        parseToJSON();
+
 
 
     }

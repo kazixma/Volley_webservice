@@ -39,6 +39,7 @@ public class HttpRequest {
                             Log.d("TAG", response.toString());
                             Log.d("TAG","HELLO");
                             bookList = bookJSONParser.parseFeed(response.toString());
+                            Log.d("TAG",bookList.get(0).getTitle());
 
 
                         }
